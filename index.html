@@ -9,7 +9,7 @@
     <meta name="description" content="Joachim C Cagas - BSIT Student and Aspiring Full-Stack Web Developer Portfolio">
     <meta name="keywords" content="Joachim C Cagas, BSIT, Web Developer, Portfolio, HTML, CSS, JavaScript">
     <meta name="author" content="Joachim C Cagas">
-    <title>Joachim C Cagas | BSIT Portfolio</title>
+    <title>Joachim C Cagas | Full Stack Developer</title>
     <style>
         #loading-screen {
             position: fixed;
@@ -218,7 +218,8 @@
             display: block;
             border: none; 
         }
-                .status-badge {
+
+        .status-badge {
             display: inline-block;
             background-color: #e6f0ff;
             color: #2b7fff;
@@ -396,7 +397,7 @@
             margin-right: 12px;
         }
         .project-links a:hover {text-decoration: underline;}
-        
+
         .contact {text-align: center;}
         .contact p {
             color: #64748b;
@@ -635,7 +636,15 @@
     color:white;
 }
         
-        .scroll-init {
+        
+        
+        
+        
+ 
+ 
+ 
+ 
+.scroll-init {
     opacity: 0;
     transform: translateY(80px);
     transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -650,6 +659,198 @@
 }
 
 
+
+/* View project button .htm l*/
+.view-more-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+
+.view-more-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.view-all-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 18px 65px;       
+    background: linear-gradient(135deg, #0052cc, #003d99);
+    color: #ffffff;
+    font-size: 20px;          
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;       
+    box-shadow: 0 12px 30px rgba(0, 61, 153, 0.4);
+    transition: all 0.2s ease-in-out;
+}
+
+.view-all-btn span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.view-all-btn:hover {
+    background: linear-gradient(135deg, #0066ff, #0044cc);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 35px rgba(0, 61, 153, 0.5);
+}
+
+.view-all-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 61, 153, 0.35);
+}
+
+
+
+
+.mobile-navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    background:#ffffff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    box-sizing:border-box;
+    z-index:9999;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.nav-logo{
+    font-size:32px;
+    font-weight:900;
+    color:#2563eb;
+}
+
+.menu-btn{
+    font-size:38px;
+    cursor:pointer;
+    color:#334155;
+}
+
+.mobile-menu{
+    position:absolute;
+    top:80px;
+    right:50px;
+    width:360px;
+    background:white;
+    border-radius:50px;
+    box-shadow:0 60px 40px rgba(0,0,0,.15);
+    display:none;
+    overflow:hidden;
+}
+
+.mobile-menu.show{
+    display:block;
+    animation:fadeDown .3s ease;
+}
+
+
+
+.mobile-menu a{
+    display:block;
+    padding:24px 28px;
+
+    text-decoration:none;
+    color:#111827;
+
+    font-size:22px;
+    font-weight:700;
+
+    border-bottom:1px solid #e5e7eb;
+}
+
+.mobile-menu a:hover{
+    background:#f8fafc;
+}
+
+.dark-mode-item{
+    padding:24px 28px;
+
+    font-size:22px;
+    font-weight:700;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.switch{
+    position:relative;
+    display:inline-block;
+    width:50px;
+    height:24px;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#ccc;
+    border-radius:50px;
+    cursor:pointer;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    left:3px;
+    top:3px;
+    background:white;
+    border-radius:50%;
+    transition:.3s;
+}
+
+input:checked + .slider{
+    background:#2563eb;
+}
+
+input:checked + .slider:before{
+    transform:translateX(26px);
+}
+
+body.dark-mode{
+    background:#0f172a;
+    color:white;
+}
+
+body.dark-mode section,
+body.dark-mode .project-card,
+body.dark-mode .skill-card{
+    background:#1e293b !important;
+    color:white !important;
+}
+
+@keyframes fadeDown{
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
 
        
@@ -668,17 +869,26 @@
         <div class="loading-text">Loading portfolio...</div>
     </div>
 
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="#" class="logo">JCC.</a>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <a href="#contact" class="btn">Hire Me</a>
-        </div>.
-    </nav>
+  
+  
+ <nav class="mobile-navbar">
+    <div class="nav-logo">Portfolio</div>
+
+    <div class="menu-btn" onclick="toggleMenu()">
+        ☰
+    </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+<a href="#about" onclick="closeMenu()">About</a>
+<a href="#skills" onclick="closeMenu()">Skills</a>
+<a href="#projects" onclick="closeMenu()">Project</a>
+<a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+</nav> 
+
+
+  
+  
     <section class="hero">
     <div class="hero-container">
        
@@ -805,6 +1015,11 @@ GitHub
     </div>
 </section>
 
+
+
+
+
+
 <section id="skills">
 
     <h2 class="section-title">Technical Skills</h2>
@@ -920,15 +1135,14 @@ GitHub
         <span class="tag tag-vscode" style="font-size:18px;padding:10px 24px;border-radius:30px;font-weight:500;min-width:120px;">VS Code</span>
 
     </div>
+</div>
+
 
 </div>
 
 
 
-
-
-
-        </div>
+                            </div>
     </section>
     
     <section id="projects">
@@ -986,11 +1200,13 @@ GitHub
                 </div>
 
                             <div class="project-card" onclick="openGallery('gallery3')">
-                    <img src="project3-1.png" alt="Joachim Netflix Project" style="height: 260px !important;">
+                    <img src="project 3-1.png" alt="Joachim Cafes Project" style="height: 260px !important;">
                     <div class="project-content" style="padding: 40px !important;">
-                        <h3 style="font-size: 28px !important; font-weight: 900 !important; margin-bottom: 14px !important; color: #111111 !important; letter-spacing: -0.5px !important;">JOACHIM NETFLIX</h3>
+                        <h3 style="font-size: 28px !important; font-weight: 900 !important; margin-bottom: 14px !important; color: #111111 !important; letter-spacing: -0.5px !important;">JOACHIM CAFES</h3>
                         <p style="font-size: 19px !important; line-height: 1.7 !important; color: #475569 !important; margin-bottom: 24px !important;">
-                            A free streaming platform with a huge library of movies and series, built for entertainment without subscription fees.
+                           
+  A point-of-sale system built for cafe shops with features like drink customization, real-time inventory, employee shifts, and daily sales analytics. Optimized for fast-paced coffee shop environments.
+
                         </p>
                         <div class="project-tags" style="display: flex !important; flex-wrap: wrap !important; gap: 10px !important; margin-bottom: 28px !important;">
                             <span style="background: #fed7aa; color: #9a3412; font-size: 15px !important; padding: 6px 16px !important; border-radius: 6px !important; font-weight: 600 !important;">HTML5</span>
@@ -1012,6 +1228,10 @@ GitHub
                 </div>
             </div>
         </div>
+     <div class="view-more-container">
+    <a href="projectgarrage.html" class="view-all-btn">Project Full Details<span>&gt;</span></a>
+</div>
+>
     </section>
 
    <section id="contact" class="bg-white">
@@ -1077,20 +1297,23 @@ GitHub
                 <img src="project2-3.png" alt="Project 2 Image 3">
             </div>
         </div>
-                                </div>
-    
+    </div>
+
     <div id="gallery3" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeGallery('gallery3')">&times;</span>
-            <button class="nav-btn prev" onclick="moveSlider('gallery3', -1)">&#10094;</button>
-            <button class="nav-btn next" onclick="moveSlider('gallery3', 1)">&#10095;</button>
-            <div class="slider">
-                <img src="project3-1.png" alt="Project 3 Image 1">
-                <img src="project3-2.png" alt="Project 3 Image 2">
-                <img src="project3-3.png" alt="Project 3 Image 3">
-            </div>
+    <div class="modal-content">
+        <span class="close" onclick="closeGallery('gallery3')">&times;</span>
+        <button class="nav-btn prev" onclick="moveSlider('gallery3', -1)">&#10094;</button>
+        <button class="nav-btn next" onclick="moveSlider('gallery3', 1)">&#10095;</button>
+        <div class="slider">
+            <img src="project 3-1.png" alt="Project 3 Image 1">
+            <img src="project 3-2.png" alt="Project 3 Image 2">
+            <img src="project 3-3.png" alt="Project 3 Image 3">
         </div>
     </div>
+</div>
+
+
+
 
     <footer>
         <div class="container">
@@ -1110,6 +1333,27 @@ GitHub
                     loadingScreen.style.display = 'none';
                 }, 400);
             }, 500);
+        }
+
+        // BAGONG DAGDAG: Loading animation para sa View Projects button
+        const viewProjectBtn = document.querySelector('.view-all-btn');
+        if (viewProjectBtn && loadingScreen) {
+            viewProjectBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Pinipigilan muna ang agarang paglipat ng pahina
+                
+                const targetUrl = viewProjectBtn.getAttribute('href');
+                
+                // Ibinabalik ang display at opacity ng loading screen
+                loadingScreen.style.display = 'flex';
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '1';
+                }, 10);
+
+                // Pagkatapos ng 500ms (oras para matapos ang loading animation), lilipat na sa project.html
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 500);
+            });
         }
 
         const elementsToAnimate = [
@@ -1138,6 +1382,7 @@ GitHub
         window.addEventListener("scroll", dynamicScrollReveal);
         dynamicScrollReveal(); 
     });
+    
 
  
     function openGallery(id) {
@@ -1170,6 +1415,54 @@ GitHub
             });
         }
     }
-</script>
     
+    // ===== MOBILE MENU =====
+
+function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("show");
+}
+
+function closeMenu() {
+    document.getElementById("mobileMenu").classList.remove("show");
+}
+
+// Smooth scroll
+document.querySelectorAll('.mobile-menu a[href^="#"]').forEach(link => {
+
+    link.addEventListener('click', function(e) {
+
+        e.preventDefault();
+
+        const target = document.querySelector(
+            this.getAttribute('href')
+        );
+
+        if(target){
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        closeMenu();
+    });
+
+});
+
+// Dark Mode
+const darkToggle = document.getElementById("darkToggle");
+
+if(darkToggle){
+
+    darkToggle.addEventListener("change", function(){
+
+        document.body.classList.toggle(
+            "dark-mode",
+            this.checked
+        );
+
+    });
+
+}
+
+                            </script>
     
