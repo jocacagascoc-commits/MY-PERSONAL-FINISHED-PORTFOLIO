@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Joachim Garage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #000000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1d4ed8;
+            text-decoration: none;
+        }
+
+        .nav-menu-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22px;
+            height: 12px;
+            cursor: pointer;
+        }
+
+        .nav-menu-icon span {
+            width: 100%;
+            height: 2px;
+            background-color: #000000;
+        }
+        /* --- LALAGYAN NG BUONG OVERLAY (Transparent dark background sa kanan) --- */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); /* Malabong itim sa gilid */
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Kapag binuksan ang menu */
+.nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- ANG PUTING CARD PANEL MULA SA KALIWA (Gaya ng nasa screenshot) --- */
+.menu-panel-card {
+    position: absolute;
+    top: 60px; /* May kaunting puwang sa itaas */
+    left: 20px;
+    width: 260px; /* Eksaktong sukat ng puting kahon */
+    background-color: #ffffff;
+    border-radius: 4px; /* Bahagyang patag na sulok base sa larawan */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 24px;
+    box-sizing: border-box;
+    transform: translateX(-300px); /* Nakatago sa kaliwa sa simula */
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-overlay.open .menu-panel-card {
+    transform: translateX(0); /* Sasalubong pakanan kapag binuksan */
+}
+
+/* Estilo ng mga Links sa Menu */
+.nav-item {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid #f1f5f9; /* Linya sa ilalim ng bawat item */
+    transition: color 0.2s;
+}
+
+.nav-item:last-child {
+    border-bottom: none; /* Walang linya ang huling item */
+}
+
+/* --- SEKSYON NG DARK MODE TOGGLE --- */
+.dark-mode-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.dark-mode-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* --- ANG MODERNONG TOGGLE SWITCH (Eksakto sa screenshot) --- */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e1; /* Kulay gray kapag naka-off */
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+    background-color: #94a3b8; /* Kulay kapag naka-on ang dark mode */
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* --- ANG MALAKING 'X' BUTTON SA KANANG ITAAS --- */
+.close-menu-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    font-weight: 300;
+    color: #000000;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+/* --- COMPATIBILITY PARA SA DARK THEME --- */
+body.dark-theme .menu-panel-card {
+    background-color: #1e293b;
+}
+body.dark-theme .nav-item, 
+body.dark-theme .dark-mode-label {
+    color: #f8fafc;
+    border-bottom: 1px solid #334155;
+}
+body.dark-theme .close-menu-btn {
+    color: #f8fafc;
+}
+body.dark-theme input:checked + .slider {
+    background-color: #3b82f6; /* Kulay asul ang switch kapag aktibo ang dark mode */
+}
+
+
+        .main-content {
+            padding: 40px 24px;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .project-meta-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d4ed8;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .breadcrumb {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .breadcrumb a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .breadcrumb span.current-page {
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        .project-image-container {
+            width: 100%;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .project-main-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.3;
+            margin: 0 0 24px 0;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .project-description {
+            font-size: 17px;
+            color: #475569;
+            line-height: 1.7;
+            margin: 0;
+            text-align: center;
+        }
+        
+.project-details-section {
+    padding: 60px 24px;
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.section-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+}
+
+.details-text-p {
+    font-size: 16px;
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.role-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+
+.role-name-text {
+    font-size: 16px;
+    color: #475569;
+    margin: 0;
+}
+
+
+.garage-portfolio-container {
+    width: 90%;
+    max-width: 420px; 
+    margin: 40px auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fafafa; 
+    padding: 10px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+
+.features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+}
+
+
+.feature-card {
+    background-color: #ffffff; 
+    padding: 28px 24px; 
+    
+    
+    border: 1px solid #f1f5f9; 
+    
+    
+    border-radius: 20px; 
+    
+    
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 
+                0 8px 16px -6px rgba(0, 0, 0, 0.02);
+}
+
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700; 
+    color: #1f2937;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+
+.card-text {
+    font-size: 0.92rem;
+    font-weight: 400;
+    color: #4b5563;
+    line-height: 1.55;
+    margin: 0;
+}
+
+
+/* --- DESIGN NAV OVERLAY MENU --- */
+.nav-overlay {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: #ffffff;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    gap: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-item {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-item:hover {
+    color: #1d4ed8;
+}
+
+.theme-toggle-btn {
+    background-color: #1d4ed8;
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+
+body.dark-theme {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+}
+body.dark-theme .navbar {
+    background-color: #0f172a;
+    border-bottom: 1px solid #334155;
+}
+body.dark-theme .nav-menu-icon span {
+    background-color: #ffffff;
+}
+body.dark-theme .nav-overlay {
+    background-color: #0f172a;
+}
+body.dark-theme .nav-item {
+    color: #f8fafc;
+}
+body.dark-theme .project-main-title, 
+body.dark-theme .section-subtitle, 
+body.dark-theme .role-title, 
+body.dark-theme .section-title, 
+body.dark-theme .card-title {
+    color: #f1f5f9 !important;
+}
+body.dark-theme .feature-card {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+}
+body.dark-theme .card-text, 
+body.dark-theme .project-description, 
+body.dark-theme .details-text-p, 
+body.dark-theme .role-name-text {
+    color: #94a3b8 !important;
+}
+body.dark-theme .garage-portfolio-container {
+    background-color: #0f172a !important;
+}
+
+
+
+.cta-section {
+    background-color: #1d4ed8 !important;
+    padding: 60px 24px !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+
+.cta-title {
+    font-size: 26px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 0 16px 0 !important;
+    letter-spacing: -0.5px;
+    text-align: center !important;
+}
+
+.cta-text {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    max-width: 500px;
+    margin: 0 auto 30px auto !important;
+    text-align: center !important;
+}
+
+.cta-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+}
+
+.btn-primary {
+    display: block !important;
+    background-color: #ffffff !important;
+    color: #1d4ed8 !important;
+    text-decoration: none !important;
+    padding: 14px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    text-align: center !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+.btn-secondary {
+    display: block !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 13px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    text-align: center !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+}
+
+/* --- FOOTER LAYOUT CONTROLS --- */
+.portfolio-footer {
+    background-color: #ffffff !important;
+    padding: 30px 24px 40px 24px !important;
+    border-top: 1px solid #f1f5f9 !important;
+}
+
+.footer-top {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    max-width: 420px !important;
+    margin: 0 auto 20px auto !important;
+}
+
+.footer-name {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+}
+
+.footer-socials {
+    display: flex !important;
+    gap: 16px !important;
+}
+
+.footer-socials a {
+    color: #0f172a !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+}
+
+.footer-copyright {
+    font-size: 13px !important;
+    color: #64748b !important;
+    text-align: center !important;
+    margin-top: 15px !important;
+}
+
+/* --- COMPATIBILITY SA DARK MODE THEME --- */
+body.dark-theme .portfolio-footer {
+    background-color: #0f172a !important;
+    border-top: 1px solid #334155 !important;
+}
+body.dark-theme .footer-name, 
+body.dark-theme .footer-socials a {
+    color: #f8fafc !important;
+}
+body.dark-theme .footer-copyright {
+    color: #94a3b8 !important;
+}
+
+.repo-btn-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 30px auto 50px auto !important;
+    text-align: center !important;
+}
+
+.github-repo-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    background-color: #1d4ed8 !important; 
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 12px 32px !important; 
+    border-radius: 24px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15) !important;
+    transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.github-repo-btn:hover {
+    background-color: #1e40af !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-arrow {
+    display: inline-block !important;
+    transition: transform 0.2s ease !important;
+}
+
+.github-repo-btn:hover .btn-arrow {
+    transform: translateX(3px) !important; 
+}
+
+.profile-card-panel {
+    background-color: var(--card-bg) !important;
+    border: 1px solid #f1f5f9 !important;
+    border-radius: 20px !important;
+    padding: 32px 24px !important; 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 
+                0 8px 16px -6px rgba(0, 0, 0, 0.02) !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    max-width: 100% !important;
+}
+
+.profile-tag {
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: var(--card-title-color) !important;
+    letter-spacing: 1px !important;
+    margin: 0 0 16px 0 !important;
+    text-transform: uppercase !important;
+}
+
+.profile-quote {
+    font-size: 0.92rem !important;
+    font-weight: 400 !important;
+    color: var(--card-text-color) !important;
+    line-height: 1.6 !important; 
+    margin: 0 !important;
+    font-style: normal !important; 
+}
+
+body.dark-theme .profile-card-panel {
+    border: 1px solid #334155 !important;
+    box-shadow: none !important;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">Portfolio</a>
+        <div class="nav-menu-icon" id="hamburger-btn">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-menu">
+        
+        <button class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">&times;</button>
+   <div class="menu-panel-card">
+            <a href="index.html" class="nav-item">Home</a>
+            
+          
+            <div class="dark-mode-row">
+                <span class="dark-mode-label">Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="theme-checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            
+            <a href="projectgarrage.html" class="nav-item">Joachim Garage</a>
+            <a href="project2.html" class="nav-item">Joachim Esports</a>
+            <a href="project3.html" class="nav-item">Joachim Cafes</a>
+        </div>
+    </div>
+    
+    
+
+    <main class="main-content">
+        <div class="project-meta-title"></div>
+        
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &gt; <a href="projectgarrage.html">Projects</a> &gt; <span class="current-page">Joachim Garage Showcase and Vehicle
+                    Management System</span>
+        </div>
+
+        <div class="project-image-container">
+            <img src="project1-1.png" alt="Joachim Garage Application View">
+        </div>
+
+        <h1 class="project-main-title">Joachim Garage: Exclusive Showcase for Luxury and High-Performance Vehicles</h1>
+        
+        <p class="project-description">
+            This web application features an optimized point-of-sale layout and visual gallery crafted to display elite automotive vehicles. It manages luxury inventory records, processes simulated client viewing appointments, and delivers modern fluid transitions for an upscale showroom encounter; utilizing MVC architecture patterns, secured local states, structured layouts, and comprehensive dynamic filters.
+        </p>
+        
+        <div class="repo-btn-container">
+    <a href="https://github.com/jocacagascoc-commits" target="_blank" class="github-repo-btn">
+        Github Repo 
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="btn-arrow">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </a>
+</div>
+
+
+            <!-- Overview and Role Details Block -->
+    <section class="project-details-section">
+        <h2 class="section-subtitle">Overview</h2>
+        <p class="details-text-p">
+            This web application features an optimized vehicle management structure and customized catalog system crafted to display elite high-performance vehicles. It manages garage inventory logs, structures multi-tier specifications for prospective clients, and processes simulation filters; utilizing MVC architecture patterns, secured dynamic parameters, well-arranged grid structures, and comprehensive data controls for a precise tracking workflow.
+        </p>
+
+        <h3 class="role-title">Role</h3>
+        <p class="role-name-text">Full Stack Developer</p>
+    </section>
+    
+    </main>
+<main class="garage-portfolio-container">
+  
+    <h2 class="section-title">Core Features</h2>
+
+    <div class="features-grid">
+        
+        <!-- Card 1: Customer & Vehicle -->
+        <div class="feature-card reveal">
+            <h3 class="card-title">Customer & Vehicle Management</h3>
+            <p class="card-text">
+                Centralized CRUD and relationship management for car owners, vehicles, service history, and contact info, including maintenance logs and grouping for billing.
+            </p>
+        </div>
+
+        <!-- Card 2: Job Cards & Invoice -->
+        <div class="feature-card reveal">
+            <h3 class="card-title">Job Cards & Invoice Management</h3>
+            <p class="card-text">
+                Generate and maintain job cards, charge schedules for parts and labor, adjustments, and statements; supports recurring maintenance plans and manual billing entries.
+            </p>
+        </div>
+
+        <!-- Card 3: Payments & Reconciliation -->
+        <div class="feature-card reveal">
+            <h3 class="card-title">Payments & Billing Reconciliation</h3>
+            <p class="card-text">
+                Accept and record payments, apply payments to specific service invoices, handle refunds and item voids, and reconcile daily deposits against garage ledgers.
+            </p>
+        </div>
+
+        <!-- Card 4: Parts Inventory & Transactions -->
+        <div class="feature-card reveal">
+            <h3 class="card-title">Parts Inventory & Transactions</h3>
+            <p class="card-text">
+                Manage spare parts inventory and categories, create sales transactions with itemized line items, and track parts utilization, stock alerts, and shop income.
+            </p>
+        </div>
+
+        <!-- Card 5: Service Reports & Analytics -->
+        <div class="feature-card reveal">
+            <h3 class="card-title">Service Reports & Analytics</h3>
+            <p class="card-text">
+                Produce shop revenue statements, customer account summaries, and mechanic operational reports; export PDFs/Excel for financial audits and garage management review.
+            </p>
+        </div>
+
+       
+        <div class="feature-card reveal">
+            <h3 class="card-title">Activity Logs & Service Notifications</h3>
+            <p class="card-text">
+                Record logs for vehicle repair updates, send automated email or SMS notifications for completed jobs and receipts, and run background tasks for service reminders.
+            </p>
+        </div>
+        
+    <section class="cta-section">
+        <h2 class="cta-title">Let's build something together</h2>
+        <p class="cta-text">
+            Interested in optimizing your garage operations or viewing our elite automotive collection? Let's discuss how the Joachim Garage application can elevate your business tracking workflow.
+        </p>
+        <div class="cta-buttons">
+         
+            <a href="mailto:joca.cagas.coc@phinmaed.com" class="btn-primary">Contact Me</a>
+           
+            <a href="Resume.html" class="btn-secondary">View Resume</a>
+        </div>
+    </section>
+
+    <!-- FOOTER NG WEBSITE (Puting Background) -->
+    <footer class="portfolio-footer">
+        <div class="footer-top">
+            <span class="footer-name">Joachim C. Cagas</span>
+            <div class="footer-socials">
+                <a href="#" aria-label="Facebook">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8z"/></svg>
+                </a>
+             
+                <a href="mailto:joca.cagas.coc@phinmaed.com" aria-label="Email">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"></path></svg>
+                </a>
+                <a href="#" aria-label="GitHub">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.02a9.58 9.58 0 015 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+                </a>
+            </div>
+        </div>
+        <p class="footer-copyright">© 2026 Full Stack Developer. Built with precision.</p>
+    </footer>
+     
+     
+
+    </div>
+</main>
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. HAMBURGER MENU WITH SAFETY CHECKS
+            const hamburgerBtn = document.getElementById("hamburger-btn");
+            const closeMenuBtn = document.getElementById("close-menu-btn");
+            const navMenu = document.getElementById("nav-menu");
+
+            if (hamburgerBtn && navMenu) {
+                hamburgerBtn.addEventListener("click", () => {
+                    navMenu.classList.add("open");
+                });
+            }
+
+            if (closeMenuBtn && navMenu) {
+                closeMenuBtn.addEventListener("click", () => {
+                    navMenu.classList.remove("open");
+                });
+            }
+            
+            if (navMenu) {
+                navMenu.addEventListener("click", (e) => {
+                    if (e.target === navMenu) {
+                        navMenu.classList.remove("open");
+                    }
+                });
+            }
+
+            // 2. DARK MODE TOGGLE WITH SAFETY CHECK
+            const themeCheckbox = document.getElementById("theme-checkbox");
+            
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-theme");
+                if (themeCheckbox) themeCheckbox.checked = true;
+            }
+
+            if (themeCheckbox) {
+                themeCheckbox.addEventListener("change", () => {
+                    if (themeCheckbox.checked) {
+                        document.body.classList.add("dark-theme");
+                        localStorage.setItem("theme", "dark");
+                    } else {
+                        document.body.classList.remove("dark-theme");
+                        localStorage.setItem("theme", "light");
+                    }
+                });
+            }
+
+            
+            const cards = document.querySelectorAll(".feature-card");
+            
+            if (cards.length > 0) {
+                const options = {
+                    root: null,
+                    threshold: 0.05,
+                    rootMargin: "0px 0px -15% 0px"
+                };
+
+                let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                const observer = new IntersectionObserver((entries) => {
+                    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const isScrollingDown = currentScrollTop > lastScrollTop;
+                    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            if (isScrollingDown) {
+                                entry.target.classList.add("show");
+                            }
+                        } else {
+                            entry.target.classList.remove("show");
+                        }
+                    });
+                }, options);
+
+                cards.forEach(card => observer.observe(card));
+            }
+        });
+        
+        const featureCards = document.querySelectorAll(".feature-card");
+
+if (featureCards.length > 0) {
+    featureCards.forEach((card, index) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(80px) scale(0.96)";
+        card.style.transition = "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)";
+        card.style.transitionDelay = `${index * 0.12}s`;
+        card.style.willChange = "opacity, transform";
+    });
+
+    let lastScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+    function handleDynamicScroll() {
+        const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        const isScrollingDown = currentScrollPos > lastScrollPos;
+        lastScrollPos = currentScrollPos <= 0 ? 0 : currentScrollPos;
+
+        const triggerBottom = window.innerHeight * 0.85; 
+
+        featureCards.forEach(card => {
+            const elementTop = card.getBoundingClientRect().top;
+
+            if (isScrollingDown) {
+                if (elementTop < triggerBottom) {
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0) scale(1)";
+                }
+            } else {
+                if (elementTop > window.innerHeight * 0.88) {
+                    card.style.opacity = "0";
+                    card.style.transform = "translateY(80px) scale(0.96)";
+                }
+            }
+        });
+    }
+
+    window.addEventListener("scroll", handleDynamicScroll, { passive: true });
+    handleDynamicScroll();
+}
+
+        
+    </script>
+    
+    
+
+</body>
+</html>
