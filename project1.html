@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joachim Garage | Project Details</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            font-family: sans-serif;
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #e0ebff 0%, #ffffff 100%);
+            padding: 40px 24px 20px 24px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #2563eb;
+        }
+
+        .breadcrumb a.active {
+            color: #1e3a8a;
+            pointer-events: none;
+        }
+
+        .breadcrumb span {
+            color: #94a3b8;
+            margin: 0 8px;
+        }
+
+        .project-header h1 {
+            font-size: 32px;
+            color: #0f172a;
+            margin: 0 0 16px 0;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .project-header p {
+            font-size: 16px;
+            color: #475569;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 600px;
+        }
+
+        .main-container {
+            padding: 0 20px 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project-feature-card {
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 60px;
+        }
+
+        .project-image-wrapper {
+            width: 100%;
+            display: block;
+        }
+
+        .project-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .project-content-wrapper {
+            padding: 24px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #eff6ff;
+            color: #2563eb;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .project-title {
+            font-size: 28px;
+            color: #0f172a;
+            margin: 0 0 16px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .project-text-desc {
+            font-size: 16px;
+            color: #475569;
+            line-height: 1.6;
+            margin: 0 0 24px 0;
+        }
+
+        .tech-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tech-tag {
+            background-color: #f1f5f9;
+            color: #64748b;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .action-button-container {
+            width: 100%;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            background-color: #0052cc;
+            color: #ffffff;
+            text-align: center;
+            padding: 16px 0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: background-color 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background-color: #0041a3;
+        }
+
+        /* Technologies Used Infinite Loop Slider Section */
+        .tech-section-title {
+            text-align: center;
+            font-size: 28px;
+            color: #0f172a;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .slider-wrapper {
+            width: 100%;
+            overflow: hidden;
+            padding: 15px 0;
+            background-color: #f8fafc;
+            position: relative;
+            margin-bottom: 80px;
+        }
+
+        .slider-track {
+            display: flex;
+            width: calc(250px * 10);
+            animation: scrollTrack 15s linear infinite;
+            gap: 20px;
+        }
+
+        .slider-item {
+            width: 180px;
+            height: 60px;
+            background-color: #ffffff;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            font-weight: 600;
+            color: #334155;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        @keyframes scrollTrack {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-180px * 5 - 100px)); }
+        }
+              /* Connect / Call to Action Footer Section */
+        .cta-section {
+            background-color: #1d67e5;
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 24px;
+            position: relative;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+            opacity: 0.9;
+        }
+
+        .cta-buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .cta-btn-white {
+            display: block;
+            width: 100%;
+            background-color: #ffffff;
+            color: #1d67e5;
+            text-decoration: none;
+            padding: 14px 0;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-btn-outline {
+            display: block;
+            width: 100%;
+            background-color: transparent;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 0;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid #ffffff;
+            box-sizing: border-box;
+        }
+
+        /* Floating Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 50px;
+            height: 50px;
+            background-color: #0f172a;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+        .footer-section {
+    background-color: #ffffff;
+    padding: 30px 24px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials a {
+    color: #0f172a;
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-socials a:hover {
+    color: #1d67e5;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    color: #475569;
+    margin: 0;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+.footer-section {
+    background-color: #ffffff;
+    padding: 30px 24px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials a {
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-socials a:hover {
+    color: #1d67e5;
+    transform: scale(1.1);
+}
+
+.footer-socials svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    color: #475569;
+    margin: 0;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+.cta-section {
+    background-color: #1d67e5;
+    color: #ffffff;
+    text-align: center;
+    padding: 60px 24px;
+    font-family: sans-serif;
+}
+
+.cta-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.5px;
+}
+
+.cta-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+    opacity: 0.9;
+}
+
+.cta-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.cta-btn-white {
+    display: block;
+    width: 100%;
+    background-color: #ffffff;
+    color: #1d67e5;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-btn-white:hover {
+    background-color: #f8fafc;
+    transform: translateY(-2px);
+}
+
+.cta-btn-outline {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 2px solid #ffffff;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+.cta-section {
+    background-color: #1d67e5;
+    color: #ffffff;
+    text-align: center;
+    padding: 60px 24px;
+    font-family: sans-serif;
+}
+
+.cta-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    letter-spacing: -0.5px;
+}
+
+.cta-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+    opacity: 0.9;
+}
+
+.cta-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.cta-btn-white {
+    display: block;
+    width: 100%;
+    background-color: #ffffff;
+    color: #1d67e5;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-btn-white:hover {
+    background-color: #f8fafc;
+    transform: translateY(-2px);
+}
+
+.cta-btn-outline {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 2px solid #ffffff;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.footer-section {
+    background-color: #ffffff;
+    padding: 30px 24px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials a {
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-socials a:hover {
+    color: #1d67e5;
+    transform: scale(1.1);
+}
+
+.footer-socials svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    color: #475569;
+    margin: 0;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+    
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-item.show-reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.menu-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: flex-end; /* Itutulak nito ang burger button sa dulong kanan */
+    width: 100%;
+    margin-bottom: 25px;
+    z-index: 1000;
+}
+
+.menu-burger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 24px;
+    height: 18px;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.burger-line {
+    width: 100%;
+    height: 3px;
+    background-color: #0f172a;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-burger-btn.open-state .burger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-burger-btn.open-state .burger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-burger-btn.open-state .burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.side-nav-panel {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 80px 24px 30px 24px;
+    box-sizing: border-box;
+    gap: 15px;
+    transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.side-nav-panel.active-state {
+    left: 0;
+}
+
+.nav-item-link {
+    display: block;
+    color: #0f172a;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-item-link:hover {
+    background-color: #e0ebff;
+    color: #2563eb;
+}
+
+.mode-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    border-top: 1px solid #f1f5f9;
+    margin: 10px 0;
+}
+
+.mode-label-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.toggle-switch-ui {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.toggle-switch-ui input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider-round {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e1;
+    transition: background-color 0.3s ease;
+    border-radius: 34px;
+}
+
+.toggle-slider-round:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch-ui input:checked + .toggle-slider-round {
+    background-color: #2563eb;
+}
+
+.toggle-switch-ui input:checked + .toggle-slider-round:before {
+    transform: translateX(26px);
+}
+
+/* Global Variable Theme Colors */
+body {
+    background-color: var(--page-bg, #f8fafc);
+    color: var(--page-text, #0f172a);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark-mode-active"] {
+    --page-bg: #0f172a;
+    --page-text: #f8fafc;
+}
+
+[data-theme="dark-mode-active"] .burger-line {
+    background-color: #f8fafc;
+}
+
+[data-theme="dark-mode-active"] .side-nav-panel {
+    background-color: #1e293b;
+}
+
+[data-theme="dark-mode-active"] .nav-item-link {
+    color: #f8fafc;
+}
+
+[data-theme="dark-mode-active"] .nav-item-link:hover {
+    background-color: #334155;
+    color: #38bdf8;
+}
+
+[data-theme="dark-mode-active"] .mode-label-text {
+    color: #f8fafc;
+}
+
+.burger-line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #0f172a !important;
+    border-radius: 999px;
+}
+.menu-burger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <header class="project-header">
+    <div class="menu-wrapper">
+        <button type="button" class="menu-burger-btn" id="customMenuBtn" onclick="toggleCustomMenu()">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+        
+        <nav class="side-nav-panel" id="customSideNav">
+            <a href="index.html" class="nav-item-link">Home</a>
+            
+            <div class="mode-switch-container">
+                <span class="mode-label-text">Dark Mode</span>
+                <label class="toggle-switch-ui">
+                    <input type="checkbox" id="darkModeToggleInput">
+                    <span class="toggle-slider-round"></span>
+                </label>
+            </div>
+            
+            <a href="projectgarrage.html" class="nav-item-link">Joachim Garage</a>
+            <a href="project2.html" class="nav-item-link">Joachim Esports</a>
+            <a href="project3.html" class="nav-item-link">Joachim Cafes</a>
+        </nav>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> <span>&gt;</span> <a href="project.html" class="active">Projects</a>
+    </div>
+    <h1>Joachim Garage</h1>
+    <p>An exclusive collection of luxury and high-performance cars, offering premium driving experiences and world-class service built using modern web development practices.</p>
+</header>
+
+
+    <main class="main-container">
+        <!-- Main Project Card -->
+        <div class="project-feature-card">
+            <div class="project-image-wrapper">
+                <img src="project1-1.png" alt="Joachim Garage Preview">
+            </div>
+            
+            <div class="project-content-wrapper">
+                <div class="badge">Latest Project</div>
+                
+                <h2 class="project-title">Joachim Garage: Exclusive Showcase for Luxury and High-Performance Vehicles</h2>
+                
+                <p class="project-text-desc">
+                    This web application features an optimized point-of-sale layout and visual gallery crafted to display elite automotive vehicles. It manages luxury inventory records, processes simulated client viewing appointments, and delivers modern fluid transitions for an upscale showroom encounter; utilizing MVC architecture patterns, secured local states, structured layouts, and comprehensive dynamic filters.
+                </p>
+                
+                <div class="tech-tags-container">
+                    <div class="tech-tag">HTML5</div>
+                    <div class="tech-tag">CSS3</div>
+                    <div class="tech-tag">JavaScript</div>
+                    <div class="tech-tag">PHP</div>
+                    <div class="tech-tag">MySQL</div>
+                </div>
+                
+                <div class="action-button-container">
+    <a href="viewprojectgarrage.html" class="action-btn">View Project</a>
+</div>
+
+            </div>
+        </div>
+
+        
+        
+        
+        
+             <!-- Technologies Used Section with Official SVG Logos -->
+             
+             
+        <h3 class="tech-section-title">Technologies Used</h3>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                
+                <!-- Original Items -->
+                
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#E34F26;"><path d="M1.5 22L0 2h24l-1.5 20L12 24zM4 5l1.18 13.2L12 20.3l6.82-2.1L20 5zM12 14.1V11.5h4.15l-.27 3.03-3.88 1.14V11.5H8.25l-.23-2.6h8.17l.23-2.6H5.16l.68 7.8z"/></svg>
+                    HTML5
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#1572B6;"><path d="M1.5 22L0 2h24l-1.5 20L12 24zM4 5l1.18 13.2L12 20.3l6.82-2.1L20 5zM12 14.1l3.88-1.14.27-3.03H8l-.23-2.6h8.66l-.23-2.6H5.16l.45 5.2h6.39v2.6H8.25l.23 2.6z"/></svg>
+                    CSS3
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#F7DF1E;"><path d="M0 0h24v24H0z"/><path d="M22 17.5c0 1.9-1.2 3.1-3.1 3.1-1.7 0-2.8-.9-3.2-2.3l2.2-1.3c.3.8.7 1.2 1.1 1.2.5 0 .9-.3.9-.9V11h2.1v6.5zm-6.2-1.2c-.4 1.4-1.6 2.3-3.3 2.3-2 0-3.3-1.4-3.3-3.6V11H11.3v4.1c0 1.2.6 1.8 1.5 1.8.8 0 1.4-.6 1.4-1.7V11h2.1v5.3z" fill="#000"/></svg>
+                    JavaScript
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#777BB4;"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.5 2 12 6.48 2 12 2zm1.6 13h1.8l1.3-4.5h-1.8zm-4.3 0h1.8l1.3-4.5H11zm-4.3 0H6.8l1.3-4.5H6.3z"/></svg>
+                    PHP
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#00758F;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.5 2 12 2zm-1.8 14.5H8.5V7.5h1.7v9zm5.1 0h-1.7V9.8L12.5 11v-1.5l2.4-1.6h.5v8.6z"/></svg>
+                    MySQL
+                </div>
+                
+                <!-- Duplicate Items for infinite loop effect -->
+                
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#E34F26;"><path d="M1.5 22L0 2h24l-1.5 20L12 24zM4 5l1.18 13.2L12 20.3l6.82-2.1L20 5zM12 14.1V11.5h4.15l-.27 3.03-3.88 1.14V11.5H8.25l-.23-2.6h8.17l.23-2.6H5.16l.68 7.8z"/></svg>
+                    HTML5
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#1572B6;"><path d="M1.5 22L0 2h24l-1.5 20L12 24zM4 5l1.18 13.2L12 20.3l6.82-2.1L20 5zM12 14.1l3.88-1.14.27-3.03H8l-.23-2.6h8.66l-.23-2.6H5.16l.45 5.2h6.39v2.6H8.25l.23 2.6z"/></svg>
+                    CSS3
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#F7DF1E;"><path d="M0 0h24v24H0z"/><path d="M22 17.5c0 1.9-1.2 3.1-3.1 3.1-1.7 0-2.8-.9-3.2-2.3l2.2-1.3c.3.8.7 1.2 1.1 1.2.5 0 .9-.3.9-.9V11h2.1v6.5zm-6.2-1.2c-.4 1.4-1.6 2.3-3.3 2.3-2 0-3.3-1.4-3.3-3.6V11H11.3v4.1c0 1.2.6 1.8 1.5 1.8.8 0 1.4-.6 1.4-1.7V11h2.1v5.3z" fill="#000"/></svg>
+                    JavaScript
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#777BB4;"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.5 2 12 6.48 2 12 2zm1.6 13h1.8l1.3-4.5h-1.8zm-4.3 0h1.8l1.3-4.5H11zm-4.3 0H6.8l1.3-4.5H6.3z"/></svg>
+                    PHP
+                </div>
+                <div class="slider-item">
+                    <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#00758F;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.5 2 12 2zm-1.8 14.5H8.5V7.5h1.7v9zm5.1 0h-1.7V9.8L12.5 11v-1.5l2.4-1.6h.5v8.6z"/></svg>
+                    MySQL
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    
+        <!-- Call to Action Section -->
+        
+        
+    <section class="cta-section">
+        <h2>Let's build something together</h2>
+        <p>Interested in working together or learning more about my projects? Let's discuss how I can help bring your ideas to life as a Full Stack Developer.</p>
+        
+        <div class="cta-buttons-container">
+            <a href="mailto: joca.cagas.coc@phinmaed.com" class="cta-btn-white">Contact Me</a>
+            <a href="Resume.html" class="cta-btn-outline">View Resume</a>
+        </div>
+    </section>
+    
+        
+      <!-- Footer Section -->
+      
+      
+    <footer class="footer-section">
+        <div class="footer-top">
+            <h3 class="footer-name">Joachim C Cagas</h3>
+            <div class="footer-socials">
+                
+                <a href="#" target="_blank" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                </a>
+                
+                <a href="mailto:your-email@example.com" aria-label="Gmail">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                
+                <a href="#" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                </a>
+                
+                <a href="#" target="_blank" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+            <p class="footer-copyright" alignment="center">© 2026 Full Stack Developer. Built with precision.</p>
+        </div>
+        <p class="footer-copyright">&copy; 2026 Full Stack Developer. Built with precision.</p>
+        
+    </footer>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+    
+    const revealItems = [
+        ...document.querySelectorAll(".project-header > *"),
+        ...document.querySelectorAll(".project-feature-card"),
+        ...document.querySelectorAll(".tech-section-title"),
+        ...document.querySelectorAll(".slider-wrapper"),
+        ...document.querySelectorAll(".cta-section h2"),
+        ...document.querySelectorAll(".cta-section p"),
+        ...document.querySelectorAll(".cta-buttons-container"),
+        ...document.querySelectorAll(".footer-top"),
+        ...document.querySelectorAll(".footer-copyright")
+    ];
+
+    revealItems.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(50px)";
+        el.style.transition = "opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1)";
+    });
+
+    const observerOptions = {
+        root: null,
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }, 100); 
+            } else {
+                entry.target.style.opacity = "0";
+                entry.target.style.transform = "translateY(50px)";
+            }
+        });
+    }, observerOptions);
+
+    revealItems.forEach(item => observer.observe(item));
+});
+
+function openGallery(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeGallery(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.style.display = 'none';
+}
+
+window.onclick = function (e) {
+    document.querySelectorAll('.modal').forEach(modal => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+};
+
+function moveSlider(galleryId, direction) {
+    const slider = document.querySelector(`#${galleryId} .slider`);
+    if (!slider) return;
+    const img = slider.querySelector('img');
+    if (img) {
+        const imageWidth = img.clientWidth;
+        slider.scrollBy({
+            left: imageWidth * direction,
+            behavior: 'smooth'
+        });
+    }
+}
+function toggleCustomMenu() {
+    const btn = document.getElementById("customMenuBtn");
+    const nav = document.getElementById("customSideNav");
+    
+    if (btn && nav) {
+        btn.classList.toggle("open-state");
+        nav.classList.toggle("active-state");
+    }
+}
+
+document.addEventListener("click", (event) => {
+    const btn = document.getElementById("customMenuBtn");
+    const nav = document.getElementById("customSideNav");
+    
+    if (nav && btn && !nav.contains(event.target) && !btn.contains(event.target)) {
+        btn.classList.remove("open-state");
+        nav.classList.remove("active-state");
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleInput = document.getElementById("darkModeToggleInput");
+    const savedTheme = localStorage.getItem("portfolio-theme") || "light";
+    
+    if (savedTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark-mode-active");
+        if (toggleInput) toggleInput.checked = true;
+    } else {
+        document.documentElement.removeAttribute("data-theme");
+    }
+
+    if (toggleInput) {
+        toggleInput.addEventListener("change", (e) => {
+            if (e.target.checked) {
+                document.documentElement.setAttribute("data-theme", "dark-mode-active");
+                localStorage.setItem("portfolio-theme", "dark");
+            } else {
+                document.documentElement.removeAttribute("data-theme");
+                localStorage.setItem("portfolio-theme", "light");
+            }
+        });
+    }
+});
+
+  </script>
+  
+
+      
